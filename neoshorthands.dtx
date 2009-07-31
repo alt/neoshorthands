@@ -1,0 +1,140 @@
+% \iffalse
+%% File: neoshorthands.dtx by Arno Trautmann, mail: arno dot trautmann at gmx dot de
+%<*driver>
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+\input docstrip.tex
+\askforoverwritefalse
+\preamble
+
+EXPERIMENTAL CODE
+
+Do not distribute this file without also distributing the
+source files specified above.
+
+Do not distribute a modified version of this file under the same name.
+
+\endpreamble
+\postamble
+\endpostamble
+\keepsilent
+\generate{\file{neoshorthands.sty}{\from{neoshorthands.dtx}{package}}}
+
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+\ProvidesFile{neoshorthands.sty}
+  [30.07.2009 v0.a shorthands for using Neo+XeLaTeX]
+\documentclass{gmdocc}
+\usepackage{
+  hyperref,
+  polyglossia
+}
+\usepackage[draft,index,marginclue]{fixme}
+\hypersetup{
+  pdfborder= 0 0 0,
+  colorlinks=true,
+  linkcolor=blue
+}
+\setmainlanguage{english}
+\setmainfont{TeX Gyre Pagella}
+
+\title{|neoshorthands|}
+\author{Arno Trautmann\\ \href{mailto:arno.trautmann@gmx.de}{arno.trautmann@gmx.de}}
+\def\marginpartt{\scriptsize\ttfamily}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This is the documentation of the package |neoshorthands|. It is a tool to use the powerfull Neo-layout with \XeLaTeX. It does not do very much, but mapping many of the usefull symbols to \TeX\ commands. |τ| will be converted to |\tau|. This package does \emph{not} define fancy commands and is therefore very robust. Just say |\usepackage{neoshorthands}|. If you find any incompatiblities with any package, pleas drop me a mail and maybe I can take care of it.
+\end{abstract}
+The single command of this package is |\shorthand{τ}\tau| wich maps the command onto the given symbol. You can add your own definitions, but please consider to send me the code so I could add it to the package. Only with the help of many people, this package can be usefull for many people!
+
+|\sh{τ}\tau| is a shorthand for |\shorthand|. It could have been |\ns| for |\neoshorthand|, but I found |\ns| not to be an appropriate macro name.
+
+Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the code (I copied it from the alttex package).
+\tableofcontents
+\section{Implementation}
+\DocInput{neoshorthands.dtx}
+\end{document}
+%</driver>
+%
+%<*package>
+% \fi
+% First, the helper macros. Thanks to the german mailinglist participants!
+% \begin{macrocode}
+\def\add@special#1{%
+  \rem@special{#1}%
+  \expandafter\gdef\expandafter\dospecials\expandafter
+{\dospecials \do #1}%
+  \expandafter\gdef\expandafter\@sanitize\expandafter
+{\@sanitize \@makeother #1}}
+\def\rem@special#1{%
+  \def\do##1{%
+    \ifnum`#1=`##1 \else \noexpand\do\noexpand##1\fi}%
+  \xdef\dospecials{\dospecials}%
+  \begingroup
+    \def\@makeother##1{%
+      \ifnum`#1=`##1 \else \noexpand\@makeother\noexpand##1\fi}%
+    \xdef\@sanitize{\@sanitize}%
+  \endgroup}
+
+\def\shorthand#1#2{%
+  \expandafter\ifx\csname cc\string#1\endcsname\relax
+    \add@special{#1}%
+    \expandafter
+    \xdef\csname cc\string#1\endcsname{\the\catcode`#1}%
+    \begingroup
+      \catcode`\~\active  \lccode`\~`#1%
+      \lowercase{%
+      \global\expandafter\let
+         \csname ac\string#1\endcsname~%
+      \expandafter\gdef\expandafter~\expandafter{#2}}%
+    \endgroup
+    \global\catcode`#1\active
+  \else
+  \fi
+}
+\let\sh\shorthand
+% \end{macrocode}
+% And from here on, the great list of symbols is defined.
+% \begin{macrocode}
+\sh{α}\alpha
+\sh{β}\beta
+\sh{γ}\gamma
+\sh{δ}\delta
+\sh{ε}\epsilon
+\sh{η}\eta
+\sh{μ}\mu
+\sh{ν}\nu
+\sh{π}\pi
+
+\sh{τ}\tau
+\sh{ω}\omega
+
+\sh{Γ}\Gamma
+\sh{Δ}\Delta
+\sh{Π}\Pi
+\sh{Ξ}\Xi
+\sh{Σ}\sum    %% careful! this will give a sum-sign, not a Sigma!!
+\sh{Ω}\Omega
+
+\sh{⇐}\Leftarrow
+\sh{⇒}\Rightarrow
+\sh{⇔}\Leftrightarrow
+
+\sh{√}\sqrt
+\sh{∫}\int
+\sh{∂}\partial
+\sh{∃}\exists
+
+\let\sh\undefined
+% \end{macrocode}
+% If you want to change a certain symbol in your document, you have to use the command |\shorthand|, as |\sh| will no longer be defined after this package is loaded. I think, the name is too good to be blocked by such a function.
+% </package>
+% \Finale
+% \endinput
