@@ -52,9 +52,9 @@ Do not distribute a modified version of this file under the same name.
 \begin{abstract}
 This is the documentation of the package |neoshorthands|. It is a tool to use the powerfull Neo-layout with \XeLaTeX. It does not do very much, but mapping many of the usefull symbols to \TeX\ commands. |τ| will be converted to |\tau|. This package does \emph{not} define fancy commands and is therefore very robust. Just say |\usepackage{neoshorthands}|. If you find any incompatiblities with any package, pleas drop me a mail and maybe I can take care of it.
 \end{abstract}
-The single command of this package is |\shorthand{τ}\tau| wich maps the command onto the given symbol. You can add your own definitions, but please consider to send me the code so I could add it to the package. Only with the help of many people, this package can be usefull for many people!
+The single command of this package is |\neoshorthand{τ}\tau| wich maps the command onto the given symbol. You can add your own definitions, but please consider to send me the code so I could add it to the package. Only with the help of many people, this package can be usefull for many people!
 
-|\sh{τ}\tau| is a shorthand for |\shorthand|. It could have been |\ns| for |\neoshorthand|, but I found |\ns| not to be an appropriate macro name.
+|\sh{τ}\tau| is a shorthand for |\neoshorthand|. It could have been |\ns| for |\neoshorthand|, but I found |\ns| not to be an appropriate macro name.
 
 Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the code (I copied it from the alttex package).
 \tableofcontents
@@ -83,7 +83,7 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
     \xdef\@sanitize{\@sanitize}%
   \endgroup}
 
-\def\shorthand#1#2{%
+\def\neoshorthand#1#2{%
   \expandafter\ifx\csname cc\string#1\endcsname\relax
     \add@special{#1}%
     \expandafter
@@ -99,7 +99,7 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
   \else
   \fi
 }
-\let\sh\shorthand
+\let\sh\neoshorthand
 % \end{macrocode}
 % And from here on, the great list of symbols is defined.
 % \begin{macrocode}
@@ -134,7 +134,7 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 
 \let\sh\undefined
 % \end{macrocode}
-% If you want to change a certain symbol in your document, you have to use the command |\shorthand|, as |\sh| will no longer be defined after this package is loaded. I think, the name is too good to be blocked by such a function.
+% If you want to change a certain symbol in your document, you have to use the command |\neoshorthand|, as |\sh| will no longer be defined after this package is loaded. I think, the name is too good to be blocked by such a function.
 % </package>
 % \Finale
 % \endinput
