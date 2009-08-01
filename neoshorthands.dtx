@@ -103,6 +103,7 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 % \end{macrocode}
 % And from here on, the great list of symbols is defined.
 % \begin{macrocode}
+% \section{greek}
 \sh{α}\alpha
 \sh{β}\beta
 \sh{γ}\gamma
@@ -112,7 +113,8 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{μ}\mu
 \sh{ν}\nu
 \sh{π}\pi
-
+\sh{ξ}\psi
+\sh{ζ}\zeta
 \sh{τ}\tau
 \sh{ω}\omega
 
@@ -120,17 +122,38 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{Δ}\Delta
 \sh{Π}\Pi
 \sh{Ξ}\Xi
-\sh{Σ}\sum    %% careful! this will give a sum-sign, not a Sigma!!
+% careful! Σ will give a sum-sign, not a Sigma!!
+\sh{Σ}\sum
 \sh{Ω}\Omega
-
+%\section{arrows}
 \sh{⇐}\Leftarrow
 \sh{⇒}\Rightarrow
 \sh{⇔}\Leftrightarrow
+\sh{→}\rightarrow
 
+%\section{mathematical symbols}
 \sh{√}\sqrt
 \sh{∫}\int
 \sh{∂}\partial
 \sh{∃}\exists
+\sh{∞}\infty
+\sh{ℵ}\aleph
+\sh{∅}\emptyset
+
+% \section{sets and logic}
+\sh{⊂}\subset
+\sh{∪}\|cup
+\sh{∩}\||cap
+\sh{∈}\in
+\sh{∉}\notin % better than \cs{not}\cs{in}!
+\sh{∀}\forall|
+
+\section{blackboard bold}
+\sh{ℂ}\mathbb{C}
+\sh{ℕ}\mathbb{N}
+\sh{ℝ}\mathbb{R}
+\sh{ℚ}\mathbb{Q}
+\sh{ℤ}\mathbb{Z} 
 
 \let\sh\undefined
 % \end{macrocode}
