@@ -1,1 +1,3 @@
 A class to use the symbols offered by Neo. E.g. greek: τ will be \tau, but also ⇒ \Rightarrow etc.
+
+Compile the .dtx with xelatex to get documentation and .sty-file.
