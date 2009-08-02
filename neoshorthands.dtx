@@ -67,6 +67,8 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 % \fi
 % First, the helper macros. Thanks to the german mailinglist participants!
 % \begin{macrocode}
+\RequirePackage{xkeyval}
+
 \def\add@special#1{%
   \rem@special{#1}%
   \expandafter\gdef\expandafter\dospecials\expandafter
@@ -104,6 +106,24 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 % And from here on, the great list of symbols is defined.
 % \begin{macrocode}
 % \section{greek}
+\def\makeneosection#1{
+  \count@\escapechar\escapechar\m@ne\expandafter\let\csname if#1\endcsname\iffalse\expandafter\@if\csname if#1\endcsname\iftrue\expandafter\@if\csname if#1\endcsname\iffalse\escapechar\count@%
+  \csname#1true\endcsname
+  \DeclareOptionX{no#1}{\expandafter\csname#1false\endcsname}
+}
+\def\neosection#1{
+  \expandafter\csname if#1\endcsname \let\sh\neoshorthand \else \let\sh\@gobbletwo \fi
+}
+
+\makeneosection{greek}
+\makeneosection{math}
+\makeneosection{sets}
+\makeneosection{arrows}
+\makeneosection{bbm}
+
+\ProcessOptionsX
+
+\neosection{greek}
 \sh{α}\alpha
 \sh{β}\beta
 \sh{γ}\gamma
@@ -113,7 +133,9 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{μ}\mu
 \sh{ν}\nu
 \sh{π}\pi
+\sh{σ}\sigma
 \sh{ξ}\psi
+\sh{φ}\phi
 \sh{ζ}\zeta
 \sh{τ}\tau
 \sh{ω}\omega
@@ -125,13 +147,16 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 % careful! Σ will give a sum-sign, not a Sigma!!
 \sh{Σ}\sum
 \sh{Ω}\Omega
+
 %\section{arrows}
+\neosection{arrows}
 \sh{⇐}\Leftarrow
 \sh{⇒}\Rightarrow
 \sh{⇔}\Leftrightarrow
 \sh{→}\rightarrow
 
 %\section{mathematical symbols}
+\neosection{math}
 \sh{√}\sqrt
 \sh{∫}\int
 \sh{∂}\partial
@@ -141,19 +166,30 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{∅}\emptyset
 
 % \section{sets and logic}
+\neosection{sets}
 \sh{⊂}\subset
 \sh{∪}\cup
 \sh{∩}\cap
 \sh{∈}\in
-\sh{∉}\notin % better than \cs{not}\cs{in}!
+\sh{∉}\notin
 \sh{∀}\forall
 
-% \section{blackboard bold}
-\sh{ℂ}\mathbb{C}
-\sh{ℕ}\mathbb{N}
-\sh{ℝ}\mathbb{R}
-\sh{ℚ}\mathbb{Q}
-\sh{ℤ}\mathbb{Z} 
+% \section{blackboard bold math}
+% bbm needs some special treatment, as |\mathbb| is not known without the package. So we hide it and wrap it etc.
+\neosection{bbm}
+\def\makemathbb#1{
+  \expandafter\def \csname mathbb#1\endcsname{\mathbb{#1}}
+}
+\makemathbb C
+\makemathbb N
+\makemathbb R
+\makemathbb Q
+\makemathbb Z
+\sh{ℂ}\mathbbC
+\sh{ℕ}\mathbbN
+\sh{ℝ}\mathbbR
+\sh{ℚ}\mathbbQ
+\sh{ℤ}\mathbbZ
 
 \let\sh\undefined
 % \end{macrocode}
