@@ -120,6 +120,8 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \makeneosection{sets}
 \makeneosection{arrows}
 \makeneosection{bbm}
+\makeneosection{fractions}
+\makeneosection{subscripts}
 
 \ProcessOptionsX
 
@@ -134,7 +136,8 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{ν}\nu
 \sh{π}\pi
 \sh{σ}\sigma
-\sh{ξ}\psi
+\sh{ξ}\xi
+\sh{ψ}\psi
 \sh{φ}\phi
 \sh{ζ}\zeta
 \sh{τ}\tau
@@ -143,6 +146,7 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{Γ}\Gamma
 \sh{Δ}\Delta
 \sh{Π}\Pi
+\sh{Φ}\Phi
 \sh{Ξ}\Xi
 % careful! Σ will give a sum-sign, not a Sigma!!
 \sh{Σ}\sum
@@ -174,6 +178,17 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{∉}\notin
 \sh{∀}\forall
 
+% \section{sub/superscript}
+\neosection{subscripts}
+\def\subo{_0}
+\sh{₀}\subo
+\def\supii{^2}
+\sh{²}\supii
+
+\neosection{fractions}
+\def\half{\textstyle{\frac 12}}
+\sh{½}\half
+
 % \section{blackboard bold math}
 % bbm needs some special treatment, as |\mathbb| is not known without the package. So we hide it and wrap it etc.
 \neosection{bbm}
@@ -196,7 +211,6 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 % </package>
 % \section{contribution}
 % If you want to change a certain symbol in your document, you have to use the command |\neoshorthand|, as |\sh| will no longer be defined after this package is loaded. I think, the name is too good to be blocked by such a function.
-% Thanks to all people that have submitted additions:\\
-% Dennis-ſ
+% Thanks to Dennis-ſ for submitting some \cs{sh}-lines!b
 % \Finale
 % \endinput
