@@ -101,11 +101,7 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
   \else
   \fi
 }
-\let\sh\neoshorthand
-% \end{macrocode}
-% And from here on, the great list of symbols is defined.
-% \begin{macrocode}
-% \section{greek}
+
 \def\makeneosection#1{
   \count@\escapechar\escapechar\m@ne\expandafter\let\csname if#1\endcsname\iffalse\expandafter\@if\csname if#1\endcsname\iftrue\expandafter\@if\csname if#1\endcsname\iffalse\escapechar\count@%
   \csname#1true\endcsname
@@ -123,8 +119,30 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \makeneosection{fractions}
 \makeneosection{subscripts}
 
+\DeclareOptionX{exclude}{\def\excludeoptions{#1}}
 \ProcessOptionsX
 
+\newif\ifpackage@option@math
+\package@option@mathtrue
+
+\def\package@test@exclude{%
+  \@for\@tempa:=\excludeoptions\do{%
+    \ifcsname ifpackage@option@\@tempa\endcsname
+      \package@option@mathfalse
+      \@nameuse{package@option@\@tempa false}%
+    \fi
+  }%
+}
+\package@test@exclude
+
+\ifx\excludeoptions\@emtpy\else
+  \package@test@exclude
+\fi
+
+% \end{macrocode}
+% And from here on, the great list of symbols is defined.
+% \begin{macrocode}
+% \section{greek}
 \neosection{greek}
 \sh{α}\alpha
 \sh{β}\beta
@@ -132,8 +150,10 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{δ}\delta
 \sh{ε}\epsilon
 \sh{η}\eta
+\sh{ϑ}\theta
 \sh{μ}\mu
 \sh{ν}\nu
+\sh{λ}\lambda
 \sh{π}\pi
 \sh{σ}\sigma
 \sh{ξ}\xi
@@ -141,6 +161,8 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{φ}\phi
 \sh{ζ}\zeta
 \sh{τ}\tau
+\sh{ϱ}\rho
+\sh{υ}\upsilon
 \sh{ω}\omega
 
 \sh{Γ}\Gamma
@@ -167,10 +189,13 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{∃}\exists
 \sh{∞}\infty
 \sh{ℵ}\aleph
-\sh{∅}\emptyset
+\sh{≥}\ge
+\sh{≤}\le
+\sh{·}\cdot
 
 % \section{sets and logic}
 \neosection{sets}
+\sh{∅}\emptyset
 \sh{⊂}\subset
 \sh{∪}\cup
 \sh{∩}\cap
@@ -181,13 +206,25 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 % \section{sub/superscript}
 \neosection{subscripts}
 \def\subo{_0}
+\def\subi{_1}
+\def\subii{_2}
 \sh{₀}\subo
+\sh{₁}\subi
+\sh{₂}\subii
 \def\supii{^2}
+\def\supiii{^3}
+\def\supiv{^4}
+\def\supvi{^6}
 \sh{²}\supii
+\sh{³}\supiii
+\sh{⁴}\supiv
+\sh{⁶}\supvi
 
 \neosection{fractions}
-\def\half{\textstyle{\frac 12}}
-\sh{½}\half
+\def\sh@half{\bgroup\textstyle\frac 12\egroup}
+\def\sh@quarter{\bgroup\textstyle\frac 12\egroup}
+\sh{½}\sh@half
+\sh{¼}\sh@quarter
 
 % \section{blackboard bold math}
 % bbm needs some special treatment, as |\mathbb| is not known without the package. So we hide it and wrap it etc.
@@ -206,11 +243,10 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{ℚ}\mathbbQ
 \sh{ℤ}\mathbbZ
 
-\let\sh\undefined
 % \end{macrocode}
 % </package>
 % \section{contribution}
 % If you want to change a certain symbol in your document, you have to use the command |\neoshorthand|, as |\sh| will no longer be defined after this package is loaded. I think, the name is too good to be blocked by such a function.
-% Thanks to Dennis-ſ for submitting some \cs{sh}-lines!b
+% Thanks to Dennis „ſ“ Heidsiek and Sebastian Werk for submitting some \cs{sh}-lines!
 % \Finale
 % \endinput
