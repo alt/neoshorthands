@@ -45,18 +45,22 @@ Do not distribute a modified version of this file under the same name.
 
 \title{|neoshorthands|}
 \author{Arno Trautmann\\ \href{mailto:arno.trautmann@gmx.de}{arno.trautmann@gmx.de}}
-\def\marginpartt{\scriptsize\ttfamily}
+\def\marginpartt{\scriptsize\ttfamily}  %% needed because of problems with the lmodern font.
 
 \begin{document}
 \maketitle
 \begin{abstract}
-This is the documentation of the package |neoshorthands|. It is a tool to use the powerfull Neo-layout with \XeLaTeX. It does not do very much, but mapping many of the usefull symbols to \TeX\ commands. |τ| will be converted to |\tau|. This package does \emph{not} define fancy commands and is therefore very robust. Just say |\usepackage{neoshorthands}|. If you find any incompatiblities with any package, pleas drop me a mail and maybe I can take care of it.
+This is the documentation of the package |neoshorthands|. It is a tool to use the powerfull Neo-layout with \XeLaTeX. It does not do very much, but mapping many of the usefull symbols to \TeX\ commands. |τ|\footnote{There should be a greek letter tau shown here. If not, this document was not compiled with a font containing the regarding glyph. Most likely, many glyphs will be missing in this pdf, so have a look at the dtx to see what’s really going on.} will be converted to |\tau|. This package does \emph{not} define fancy commands and is therefore very robust. Just say |\usepackage{neoshorthands}|. If you find any incompatiblities with any package, pleas drop me a mail and maybe I can take care of it.
 \end{abstract}
 The single command of this package is |\neoshorthand{τ}\tau| wich maps the command onto the given symbol. You can add your own definitions, but please consider to send me the code so I could add it to the package. Only with the help of many people, this package can be usefull for many people!
 
-|\sh{τ}\tau| is a shorthand for |\neoshorthand|. It could have been |\ns| for |\neoshorthand|, but I found |\ns| not to be an appropriate macro name.
+|\sh{τ}\tau| is a shorthand for |\neoshorthand|. It could have been |\ns| for |\neoshorthand|, but I found |\ns| not to be an appropriate macro name considering the german history.
 
 Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the code (I copied it from the alttex package).
+
+\section{Special features}
+Normally, the greek capital Sigma will be converted to |\sum| which is regarded as a feature. If you really want it to be a Sigma, use the package option |sigma|. Of course, you still can write both |\sum| and |\Sigma| in your document.
+
 \tableofcontents
 \section{Implementation}
 \DocInput{neoshorthands.dtx}
@@ -119,7 +123,11 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \makeneosection{fractions}
 \makeneosection{subscripts}
 
+\newif\ifneoshorthands@sigma
+\neoshorthands@sigmafalse
+
 \DeclareOptionX{exclude}{\def\excludeoptions{#1}}
+\DeclareOptionX{sigma}{\neoshorthands@sigmatrue}
 \ProcessOptionsX
 
 \newif\ifpackage@option@math
@@ -157,6 +165,7 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{π}\pi
 \sh{σ}\sigma
 \sh{ξ}\xi
+\sh{χ}\chi
 \sh{ψ}\psi
 \sh{φ}\phi
 \sh{ζ}\zeta
@@ -168,16 +177,20 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{Γ}\Gamma
 \sh{Δ}\Delta
 \sh{Π}\Pi
+\sh{Ψ}\Psi
 \sh{Φ}\Phi
+\sh{Λ}\Lambda
 \sh{Ξ}\Xi
 % careful! Σ will give a sum-sign, not a Sigma!!
-\sh{Σ}\sum
+\ifneoshorthands@sigma
+\sh{Σ}\Sigma \else \sh{Σ}\sum \fi
 \sh{Ω}\Omega
 
 %\section{arrows}
 \neosection{arrows}
+\def\ensRightarrow{\ensuremath{\Rightarrow}}
 \sh{⇐}\Leftarrow
-\sh{⇒}\Rightarrow
+\sh{⇒}\ensRightarrow
 \sh{⇔}\Leftrightarrow
 \sh{→}\rightarrow
 
@@ -189,8 +202,8 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \sh{∃}\exists
 \sh{∞}\infty
 \sh{ℵ}\aleph
-\sh{≥}\ge
-\sh{≤}\le
+\sh{≥}\geq
+\sh{≤}\leq
 \sh{·}\cdot
 
 % \section{sets and logic}
@@ -214,20 +227,35 @@ Special thanks to the guys on german \TeX\ mailinglist |tex-d-l| who gave me the
 \def\supii{^2}
 \def\supiii{^3}
 \def\supiv{^4}
+\def\supv{^5}
 \def\supvi{^6}
+\def\supvii{^7}
+\def\supviii{^8}
 \sh{²}\supii
 \sh{³}\supiii
 \sh{⁴}\supiv
+\sh{⁵}\supv
 \sh{⁶}\supvi
+\sh{⁷}\supvii
+\sh{⁸}\supviii
+
+\def\supplus{^+}
+\def\supminus{^-}
+\sh{⁺}\supplus
+\sh{⁻}\supminus
 
 \neosection{fractions}
 \def\sh@half{\bgroup\textstyle\frac 12\egroup}
 \def\sh@quarter{\bgroup\textstyle\frac 12\egroup}
+\def\sh@sixth{\bgroup\textstyle\frac 16\egroup}
+\def\sh@twothirds{\bgroup\textstyle\frac 23\egroup}
 \sh{½}\sh@half
 \sh{¼}\sh@quarter
+\sh{⅙}\sh@sixth
+\sh{⅔}\sh@twothirds
 
 % \section{blackboard bold math}
-% bbm needs some special treatment, as |\mathbb| is not known without the package. So we hide it and wrap it etc.
+% bbm needs some special treatment, as |\mathbb| is not known without the package. So we hide it and wrap it etc. Most of the glyphs are not available in this document’s font, but you can guess which glyphs should be there. If not so, look into the .dtx or .sty file using an editor with a good (complete) font.
 \neosection{bbm}
 \def\makemathbb#1{
   \expandafter\def \csname mathbb#1\endcsname{\mathbb{#1}}
