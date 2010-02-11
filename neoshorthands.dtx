@@ -41,7 +41,7 @@ Do not distribute a modified version of this file under the same name.
   linkcolor=blue
 }
 \setmainlanguage{english}
-\setmainfont{TeX Gyre Pagella}
+%\setmainfont{TeX Gyre Pagella}
 
 \title{|neoshorthands|}
 \author{Arno Trautmann\\ \href{mailto:arno.trautmann@gmx.de}{arno.trautmann@gmx.de}}
@@ -198,6 +198,7 @@ Normally, the greek capital Sigma will be converted to |\sum| which is regarded 
 \neosection{math}
 \sh{√}\sqrt
 \sh{∫}\int
+\sh{∇}\nabla
 \sh{∂}\partial
 \sh{∃}\exists
 \sh{∞}\infty
@@ -218,12 +219,14 @@ Normally, the greek capital Sigma will be converted to |\sum| which is regarded 
 
 % \section{sub/superscript}
 \neosection{subscripts}
-\def\subo{_0}
+\def\subO{_0}
 \def\subi{_1}
 \def\subii{_2}
-\sh{₀}\subo
+\sh{₀}\subO
 \sh{₁}\subi
 \sh{₂}\subii
+\def\supO{^0}
+\def\supi{^1}
 \def\supii{^2}
 \def\supiii{^3}
 \def\supiv{^4}
@@ -231,6 +234,8 @@ Normally, the greek capital Sigma will be converted to |\sum| which is regarded 
 \def\supvi{^6}
 \def\supvii{^7}
 \def\supviii{^8}
+\sh{⁰}\supO
+\sh{¹}\supi
 \sh{²}\supii
 \sh{³}\supiii
 \sh{⁴}\supiv
