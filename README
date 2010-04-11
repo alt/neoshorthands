@@ -1,8 +1,3 @@
-The class lernkarten provides a very easy way to typeset learn cards. So you can well prepare for your exams.
-Actually, I should be learning for one now …
+This is a temporary class providing an easy way to use the powerfull Neo-layout with \XeLaTeX. It does not do very much, but mapping many of the usefull symbols to \TeX\ commands. It is kind of midway between the uniinput package and unicode-math: As stupid as the first one, needing XeTeX as the latter.
 
-For documentation, download lernkarten.dtx and compile it using xelatex:
-
-xelatex lernkarten.dtx
-
-This will give you the documentation as well as the class file.
+neoshorthands is NOT recommended for productive use. It’s more kind of testing things …
